@@ -1,4 +1,10 @@
 
+using E_Store.Extentions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Persistance.Data;
+using System;
+
 namespace E_Store
 {
     public class Program
@@ -11,8 +17,18 @@ namespace E_Store
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            //---------------------------------------------------------------------------
+            #region Configure Service
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddCoreService();
+
+
+            #endregion
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
 
             var app = builder.Build();
 
@@ -24,7 +40,10 @@ namespace E_Store
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
