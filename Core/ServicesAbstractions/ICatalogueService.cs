@@ -5,6 +5,6 @@ namespace ServicesAbstractions
 {
     public interface ICatalogueService
     {
-        public Task<FetchProductResponse> FetchProductsAsync(FetchProductRequest fetchProductsRequest);
+       public Task<FetchProductResponse> FetchProductsAsync(FetchProductRequest fetchProductsRequest);
     }
 }
