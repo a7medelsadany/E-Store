@@ -17,6 +17,7 @@ namespace E_Store.Extentions
             services.AddScoped<IGenericRepository<Product>,GenericRepository<Product>>();
             services.AddScoped<IGenericRepository<Category>,GenericRepository<Category>>();
             services.AddScoped<IGenericRepository<Brand>,GenericRepository<Brand>>();
+            services.AddScoped<ICatalogueService, CatalogueService>();
 
             return services;
         }

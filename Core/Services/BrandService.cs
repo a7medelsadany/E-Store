@@ -40,8 +40,8 @@ namespace Services
             if (updateBrandRequest == null || updateBrandRequest.Brand == null)
                 throw new ArgumentNullException("Invalid data");
 
-            if (updateBrandRequest.Id != updateBrandRequest.Brand.Id)
-                throw new ArgumentException("Mismatched brand ID");
+            //if (updateBrandRequest.Id != updateBrandRequest.Brand.Id)
+            //    throw new ArgumentException("Mismatched brand ID");
 
             var existingBrand = await _genericRepository.GetByIdAsync(updateBrandRequest.Id);
             if (existingBrand == null)
