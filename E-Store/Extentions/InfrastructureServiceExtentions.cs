@@ -1,6 +1,7 @@
 ﻿using Persistance.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Domain.Contrats;
 
 namespace E_Store.Extentions
 {
@@ -12,6 +13,10 @@ namespace E_Store.Extentions
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+
+
+            services.AddScoped<ICartRepository, ICartRepository>();
+            services.AddScoped<ICartItemRepository, ICartItemRepository>();
             return services;
         }
     }

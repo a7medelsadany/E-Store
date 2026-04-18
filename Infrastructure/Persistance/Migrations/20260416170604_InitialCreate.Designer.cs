@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistance.Data;
 
@@ -11,9 +12,11 @@ using Persistance.Data;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(EStoreDbContext))]
-    partial class EStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260416170604_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,66 +24,6 @@ namespace Persistance.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("CartStatus")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset>("ModifiedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cart.CartItem", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("CartId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset>("ModifiedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartItems");
-                });
 
             modelBuilder.Entity("Domain.Entities.ProductModule.Brand", b =>
                 {
@@ -130,12 +73,12 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = 1L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5123), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7553), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Apple Inc.",
                             IsDeleted = false,
                             MetaDescription = "Apple products",
                             MetaKeywords = "apple,mac,iphone",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5129), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7560), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Apple",
                             Slug = "apple",
                             randStatus = 0
@@ -143,12 +86,12 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = 2L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5135), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7566), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Samsung Electronics",
                             IsDeleted = false,
                             MetaDescription = "Samsung products",
                             MetaKeywords = "samsung,galaxy",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5136), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7567), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Samsung",
                             Slug = "samsung",
                             randStatus = 0
@@ -156,12 +99,12 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = 3L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5139), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7571), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Nike Inc.",
                             IsDeleted = false,
                             MetaDescription = "Nike products",
                             MetaKeywords = "nike,shoes,sports",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5140), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7571), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nike",
                             Slug = "nike",
                             randStatus = 0
@@ -169,12 +112,12 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = 4L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5143), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7574), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Adidas AG",
                             IsDeleted = false,
                             MetaDescription = "Adidas products",
                             MetaKeywords = "adidas,shoes,sports",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5144), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7575), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Adidas",
                             Slug = "adidas",
                             randStatus = 0
@@ -182,12 +125,12 @@ namespace Persistance.Migrations
                         new
                         {
                             Id = 5L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5147), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7580), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sony Corporation",
                             IsDeleted = false,
                             MetaDescription = "Sony products",
                             MetaKeywords = "sony,electronics",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(5148), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(7580), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Sony",
                             Slug = "sony",
                             randStatus = 0
@@ -243,12 +186,12 @@ namespace Persistance.Migrations
                         {
                             Id = 1L,
                             CategoryStatus = 0,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7832), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9957), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Laptop computers",
                             IsDeleted = false,
                             MetaDescription = "Best laptops",
                             MetaKeywords = "laptops,computers",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7834), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9959), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Laptops",
                             Slug = "laptops"
                         },
@@ -256,12 +199,12 @@ namespace Persistance.Migrations
                         {
                             Id = 2L,
                             CategoryStatus = 0,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7839), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9963), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Mobile phones",
                             IsDeleted = false,
                             MetaDescription = "Best phones",
                             MetaKeywords = "phones,mobile",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7840), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9964), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Phones",
                             Slug = "phones"
                         },
@@ -269,12 +212,12 @@ namespace Persistance.Migrations
                         {
                             Id = 3L,
                             CategoryStatus = 0,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7843), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9967), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sports shoes",
                             IsDeleted = false,
                             MetaDescription = "Best shoes",
                             MetaKeywords = "shoes,sports",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7844), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9967), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Shoes",
                             Slug = "shoes"
                         },
@@ -282,12 +225,12 @@ namespace Persistance.Migrations
                         {
                             Id = 4L,
                             CategoryStatus = 0,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7847), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9970), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Televisions",
                             IsDeleted = false,
                             MetaDescription = "Best TVs",
                             MetaKeywords = "tv,television,sony",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(7848), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 49, DateTimeKind.Unspecified).AddTicks(9971), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "TVs",
                             Slug = "tvs"
                         });
@@ -383,7 +326,7 @@ namespace Persistance.Migrations
                             Id = 1L,
                             BrandId = 1L,
                             CategoryId = 1L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9904), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1622), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Apple MacBook Pro 14 inch",
                             ImageUrl = "macbook-pro-14.jpg",
                             IsBestSeller = true,
@@ -392,7 +335,7 @@ namespace Persistance.Migrations
                             MetaDescription = "MacBook Pro 14",
                             MetaKeywords = "apple,macbook,laptop",
                             Model = "MBP14",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9906), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1623), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "MacBook Pro 14",
                             OldPrice = 2099.99m,
                             Price = 1999.99m,
@@ -407,7 +350,7 @@ namespace Persistance.Migrations
                             Id = 2L,
                             BrandId = 1L,
                             CategoryId = 1L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9914), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1633), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Apple MacBook Air M2",
                             ImageUrl = "macbook-air-m2.jpg",
                             IsBestSeller = true,
@@ -416,7 +359,7 @@ namespace Persistance.Migrations
                             MetaDescription = "MacBook Air M2",
                             MetaKeywords = "apple,macbook,laptop",
                             Model = "MBAM2",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9915), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1634), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "MacBook Air M2",
                             OldPrice = 1399.99m,
                             Price = 1299.99m,
@@ -431,7 +374,7 @@ namespace Persistance.Migrations
                             Id = 3L,
                             BrandId = 2L,
                             CategoryId = 1L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9927), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1775), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Samsung Galaxy Book3 Pro",
                             ImageUrl = "galaxy-book3.jpg",
                             IsBestSeller = false,
@@ -440,7 +383,7 @@ namespace Persistance.Migrations
                             MetaDescription = "Galaxy Book3",
                             MetaKeywords = "samsung,laptop",
                             Model = "GB3PRO",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9928), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1776), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Samsung Galaxy Book3",
                             OldPrice = 1599.99m,
                             Price = 1499.99m,
@@ -455,7 +398,7 @@ namespace Persistance.Migrations
                             Id = 4L,
                             BrandId = 1L,
                             CategoryId = 2L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9934), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1783), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Apple iPhone 15 Pro",
                             ImageUrl = "iphone-15-pro.jpg",
                             IsBestSeller = true,
@@ -464,7 +407,7 @@ namespace Persistance.Migrations
                             MetaDescription = "iPhone 15 Pro",
                             MetaKeywords = "apple,iphone,phone",
                             Model = "IP15PRO",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9935), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1783), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "iPhone 15 Pro",
                             OldPrice = 1099.99m,
                             Price = 999.99m,
@@ -479,7 +422,7 @@ namespace Persistance.Migrations
                             Id = 5L,
                             BrandId = 1L,
                             CategoryId = 2L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9941), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1790), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Apple iPhone 15",
                             ImageUrl = "iphone-15.jpg",
                             IsBestSeller = true,
@@ -488,7 +431,7 @@ namespace Persistance.Migrations
                             MetaDescription = "iPhone 15",
                             MetaKeywords = "apple,iphone,phone",
                             Model = "IP15",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9942), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1790), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "iPhone 15",
                             OldPrice = 899.99m,
                             Price = 799.99m,
@@ -503,7 +446,7 @@ namespace Persistance.Migrations
                             Id = 6L,
                             BrandId = 2L,
                             CategoryId = 2L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9948), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1798), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Samsung Galaxy S24 Ultra",
                             ImageUrl = "galaxy-s24.jpg",
                             IsBestSeller = true,
@@ -512,7 +455,7 @@ namespace Persistance.Migrations
                             MetaDescription = "Galaxy S24",
                             MetaKeywords = "samsung,galaxy,phone",
                             Model = "GS24ULT",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 783, DateTimeKind.Unspecified).AddTicks(9948), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1799), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Samsung Galaxy S24",
                             OldPrice = 1299.99m,
                             Price = 1199.99m,
@@ -527,7 +470,7 @@ namespace Persistance.Migrations
                             Id = 7L,
                             BrandId = 3L,
                             CategoryId = 3L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(60), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1805), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Nike Air Max 270",
                             ImageUrl = "air-max-270.jpg",
                             IsBestSeller = true,
@@ -536,7 +479,7 @@ namespace Persistance.Migrations
                             MetaDescription = "Air Max 270",
                             MetaKeywords = "nike,shoes,airmax",
                             Model = "AM270",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(61), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1806), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nike Air Max 270",
                             OldPrice = 159.99m,
                             Price = 150.00m,
@@ -551,7 +494,7 @@ namespace Persistance.Migrations
                             Id = 8L,
                             BrandId = 3L,
                             CategoryId = 3L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(67), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1812), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Nike Revolution 6",
                             ImageUrl = "revolution-6.jpg",
                             IsBestSeller = false,
@@ -560,7 +503,7 @@ namespace Persistance.Migrations
                             MetaDescription = "Revolution 6",
                             MetaKeywords = "nike,shoes,running",
                             Model = "REV6",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(68), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1812), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nike Revolution 6",
                             OldPrice = 89.99m,
                             Price = 80.00m,
@@ -575,7 +518,7 @@ namespace Persistance.Migrations
                             Id = 9L,
                             BrandId = 4L,
                             CategoryId = 3L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(74), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1818), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Adidas Ultraboost 23",
                             ImageUrl = "ultraboost-23.jpg",
                             IsBestSeller = true,
@@ -584,7 +527,7 @@ namespace Persistance.Migrations
                             MetaDescription = "Ultraboost 23",
                             MetaKeywords = "adidas,shoes,ultraboost",
                             Model = "UB23",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(75), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1819), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Adidas Ultraboost 23",
                             OldPrice = 199.99m,
                             Price = 190.00m,
@@ -599,7 +542,7 @@ namespace Persistance.Migrations
                             Id = 10L,
                             BrandId = 5L,
                             CategoryId = 4L,
-                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(81), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreateDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1825), new TimeSpan(0, 0, 0, 0, 0)),
                             Description = "Sony BRAVIA XR 55 inch 4K",
                             ImageUrl = "bravia-xr-55.jpg",
                             IsBestSeller = false,
@@ -608,7 +551,7 @@ namespace Persistance.Migrations
                             MetaDescription = "BRAVIA XR 55",
                             MetaKeywords = "sony,tv,bravia,4k",
                             Model = "BRV55XR",
-                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 18, 10, 31, 15, 784, DateTimeKind.Unspecified).AddTicks(82), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedDate = new DateTimeOffset(new DateTime(2026, 4, 16, 17, 6, 4, 50, DateTimeKind.Unspecified).AddTicks(1825), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Sony BRAVIA XR 55",
                             OldPrice = 1399.99m,
                             Price = 1299.99m,
@@ -618,25 +561,6 @@ namespace Persistance.Migrations
                             SalePrice = 1199.99m,
                             Slug = "sony-bravia-xr-55"
                         });
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cart.CartItem", b =>
-                {
-                    b.HasOne("Domain.Entities.Cart.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.ProductModule.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProductModule.Product", b =>
@@ -656,11 +580,6 @@ namespace Persistance.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
-                {
-                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

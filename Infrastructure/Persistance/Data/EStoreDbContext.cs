@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Domain.Entities.ProductModule;
+using Domain.Entities.Cart;
 
 namespace Persistance.Data
 {
@@ -10,6 +11,8 @@ namespace Persistance.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         #endregion
 
         //for Configuration
