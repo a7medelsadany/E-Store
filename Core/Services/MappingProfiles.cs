@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Domain.Entities.Cart;
 using Domain.Entities.ProductModule;
+using Shared.DTOS.CartDtos;
 using Shared.DTOS.ProductDtos;
 
 
@@ -19,6 +21,14 @@ namespace Services
 
             #region Category <---> CategoryDto
             CreateMap<Category, CategoryDto>().ReverseMap();
+            #endregion
+
+            #region Cart <---> CartDto
+            CreateMap<Cart, CartDto>().ReverseMap();
+            #endregion
+
+            #region CartItem <---> CartItemDto
+            CreateMap<CartItem, CartItemDto>().ReverseMap(); 
             #endregion
         }
     }
