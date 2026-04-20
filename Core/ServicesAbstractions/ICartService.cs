@@ -15,6 +15,7 @@ namespace ServicesAbstractions
         Task<RemoveItemFromCartResponse> RemoveItemFromCartAsync(RemoveItemFromCartRequest request);
         Task<IEnumerable<CartItem>> GetCartItemsAsync();
         Task<decimal> GetCartTotalAsync();
+        Task<Cart> GetCartAsync();
         Task<int> CartItemCountAsync();
         Task<FetchCartResponse> FetchCartAsync();
         Task<string> UniqueCartIdAsync();

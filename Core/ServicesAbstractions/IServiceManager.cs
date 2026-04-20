@@ -6,5 +6,6 @@
         public ICategoryService CategoryService { get; }
         public IBrandService BrandService { get; }
         public ICatalogueService CatalogueService { get; }
+        public ICartService CartService { get; }
     }
 }

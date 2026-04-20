@@ -1,4 +1,4 @@
-
+﻿
 using E_Store.Extentions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +28,16 @@ namespace E_Store
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDistributedMemoryCache(); // ضروري لتخزين بيانات الـ Session
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // وقت انتهاء الجلسة
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
@@ -43,10 +52,13 @@ namespace E_Store
             app.UseStaticFiles();
             app.UseRouting();
 
+
+            app.UseSession();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+            
             app.MapControllers();
 
             app.Run();
