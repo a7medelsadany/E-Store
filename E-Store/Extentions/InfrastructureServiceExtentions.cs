@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Domain.Contrats;
+using Persistance.Repositories;
 
 namespace E_Store.Extentions
 {
@@ -15,8 +16,8 @@ namespace E_Store.Extentions
             });
 
 
-            services.AddScoped<ICartRepository, ICartRepository>();
-            services.AddScoped<ICartItemRepository, ICartItemRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartItemRepository, CartItemRepository>();
             return services;
         }
     }
