@@ -28,15 +28,13 @@ namespace E_Store
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDistributedMemoryCache(); // ضروري لتخزين بيانات الـ Session
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // وقت انتهاء الجلسة
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            
+            builder.Services.AddMemoryCache();
 
             builder.Services.AddSession();
+            builder.Services.AddDistributedMemoryCache(); // ضروري لتخزين بيانات الـ Session
+
+
             builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();

@@ -2,11 +2,12 @@
 using Domain.Contrats;
 using Domain.Entities.Cart;
 using Domain.Entities.ProductModule;
-using ServicesAbstractions;
 using Microsoft.AspNetCore.Http;
+using ServicesAbstractions;
 using Shared.Contracts.Request.Cart;
 using Shared.Contracts.Response.Cart;
 using Shared.DTOS.CartDtos;
+using System.Net;
 using System.Text;
 
 namespace Services
@@ -110,18 +111,25 @@ namespace Services
         public async Task<FetchCartResponse> FetchCartAsync()
         {
             FetchCartResponse response = new FetchCartResponse();
-            var cart = await GetCartAsync();
-            IEnumerable<CartItem> cartItems = new List<CartItem>();
 
-            if (cart != null)
+            var cart = await GetCartAsync();
+
+            // ✅ لو مفيش Cart → رجّع response فاضية
+            if (cart == null)
             {
-                cartItems = await cartItemRepository.GetCartItemsByCartIdAsync(cart.Id);
+                response.Messages.Add("No cart found.");
+                response.StatusCode = HttpStatusCode.NotFound;
+                return response;
             }
 
+            // ✅ بعد ما تتأكد إن cart مش null
+            var cartItems = await cartItemRepository.GetCartItemsByCartIdAsync(cart.Id);
             var cartItemsDto = mapper.Map<IEnumerable<CartItemDto>>(cartItems);
             var cartDto = mapper.Map<CartDto>(cart);
             cartDto.CartItems = cartItemsDto;
+
             response.Cart = cartDto;
+            response.StatusCode = HttpStatusCode.OK;
             return response;
         }
         #endregion
