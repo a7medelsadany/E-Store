@@ -19,6 +19,8 @@ namespace E_Store.Extentions
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ICartItemRepository, CartItemRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             return services;
         }
     }

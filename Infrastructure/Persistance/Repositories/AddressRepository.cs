@@ -1,5 +1,5 @@
 ﻿using Domain.Contrats;
-using Domain.Entities.Address;
+using Domain.Entities.AddressModule;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Data;
 

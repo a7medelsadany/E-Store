@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Address;
+﻿using Domain.Entities.AddressModule;
 
 namespace Domain.Contrats
 {

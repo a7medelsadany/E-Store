@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.ProductModule;
 
-namespace Domain.Entities.Address
+namespace Domain.Entities.AddressModule
 {
     public class Address:BaseObject
     {
