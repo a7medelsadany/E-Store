@@ -4,6 +4,7 @@ using Domain.Entities.ProductModule;
 using Domain.Entities.Cart;
 using Domain.Entities.AddressModule;
 using Domain.Entities.Customer;
+using Domain.Entities.Order;
 
 namespace Persistance.Data
 {
@@ -18,6 +19,8 @@ namespace Persistance.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         #endregion
 
         //for Configuration

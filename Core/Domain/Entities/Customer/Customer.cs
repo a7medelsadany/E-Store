@@ -7,7 +7,7 @@ namespace Domain.Entities.Customer
     {
         public long PersonId { get; set; }
         public Person Person { get; set; }
-        //public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<Order.Order> Orders { get; set; }
         public  IEnumerable<Address> Addresses { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace E_Store.Extentions
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             return services;
         }
     }
