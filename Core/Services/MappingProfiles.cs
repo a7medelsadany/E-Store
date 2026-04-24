@@ -2,10 +2,12 @@
 using Domain.Entities.AddressModule;
 using Domain.Entities.Cart;
 using Domain.Entities.Customer;
+using Domain.Entities.Order;
 using Domain.Entities.ProductModule;
 using Shared.DTOS.AddressDtos;
 using Shared.DTOS.CartDtos;
 using Shared.DTOS.CustomerDtos;
+using Shared.DTOS.OrderDtos;
 using Shared.DTOS.ProductDtos;
 
 
@@ -44,7 +46,15 @@ namespace Services
             #endregion
 
             #region Customer <--->CustomerDto
-            CreateMap<Customer, CustomerDto>().ReverseMap(); 
+            CreateMap<Customer, CustomerDto>().ReverseMap();
+            #endregion
+
+            #region Order<--->OrderDto
+            CreateMap<Order, OrderDto>().ReverseMap();
+            #endregion
+
+            #region OrderItem <--->OrderItemDto
+            CreateMap<OrderItem, OrderItemsDto>().ReverseMap(); 
             #endregion
         }
     }
