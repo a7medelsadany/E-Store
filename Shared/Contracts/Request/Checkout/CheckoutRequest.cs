@@ -2,14 +2,16 @@
 using Shared.DTOS.AddressDtos;
 using Shared.DTOS.CartDtos;
 using Shared.DTOS.CustomerDtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Contracts.Request.Checkout
 {
     public class CheckoutRequest
     {
-        public CustomerDto Customer { get; set; }
-        public AddressDto  Address { get; set; }
-        public CartDto Cart { get; set; }
-        public PaymentMethod paymentMethod { get; set; }
+        public long CustomerId { get; set; }
+        public long AddressId { get; set; }
+        [Required]
+        public string UniqueCartId { get; set; }=string.Empty;
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }
