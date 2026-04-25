@@ -7,6 +7,13 @@ namespace Persistance.Repositories
 {
     public class CartRepository(EStoreDbContext _dbContext) : ICartRepository
     {
+        public async Task<Cart?> GetCartByUniqueIdAsync(string uniqueCartId)
+        {
+            return await _dbContext.Carts
+                .Include(c => c.CartItems)
+                    .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UniqueCartId == uniqueCartId);
+        }
         public void AddCart(Cart cart)
         {
            _dbContext.Carts.Add(cart);

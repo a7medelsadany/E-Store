@@ -2,5 +2,6 @@
 {
     public class CheckoutResponse:ResponseBase
     {
+        public long OrderId { get; set; } 
     }
 }

@@ -14,6 +14,7 @@ namespace Domain.Entities.Order
         public long AddressId { get; set; }
         public Address DeliveryAddress  { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
 
     }
 }

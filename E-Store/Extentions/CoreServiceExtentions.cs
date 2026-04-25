@@ -18,6 +18,8 @@ namespace E_Store.Extentions
             services.AddScoped<IGenericRepository<Category>,GenericRepository<Category>>();
             services.AddScoped<IGenericRepository<Brand>,GenericRepository<Brand>>();
             services.AddScoped<ICatalogueService, CatalogueService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICheckoutService, CheckoutService>();
 
             return services;
         }

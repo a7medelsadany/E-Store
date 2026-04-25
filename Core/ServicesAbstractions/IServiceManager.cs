@@ -7,5 +7,7 @@
         public IBrandService BrandService { get; }
         public ICatalogueService CatalogueService { get; }
         public ICartService CartService { get; }
+        public IOrderService orderService { get;  }
+        public ICheckoutService checkoutService { get;  }
     }
 }

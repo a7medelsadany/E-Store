@@ -1,4 +1,5 @@
 ﻿using Shared.DTOS.AddressDtos;
+using Shared.DTOS.OrderDtos;
 
 namespace Shared.DTOS.CustomerDtos
 {
@@ -15,7 +16,7 @@ namespace Shared.DTOS.CustomerDtos
         public DateTimeOffset CreateDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
-        //public IEnumerable<OrderDto> Orders { get; set; }
+        public IEnumerable<OrderDto> Orders { get; set; }
         public IEnumerable<AddressDto> Addresses { get; set; }
     }
 }

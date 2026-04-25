@@ -4,6 +4,7 @@ namespace Domain.Contrats
 {
     public interface ICartRepository
     {
+        Task<Cart?> GetCartByUniqueIdAsync(string uniqueCartId);
         Task<Cart?> GetCartByIdAsync(long Id);
         Task<IEnumerable<Cart>> GetAllAsync();
         void AddCart(Cart cart);

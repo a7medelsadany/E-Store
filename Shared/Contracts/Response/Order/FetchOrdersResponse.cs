@@ -9,7 +9,7 @@ namespace Shared.Contracts.Response.Order
 {
     public class FetchOrdersResponse:ResponseBase
     {
-        public int BrandsPerPage { get; set; }
+        public int OrdersPerPage { get; set; }
         public bool HasPreviousPages { get; set; }
         public bool HasNextPages { get; set; }
         public int CurrentPage { get; set; }
