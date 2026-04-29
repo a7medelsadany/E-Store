@@ -22,6 +22,7 @@ namespace E_Store
             #region Configure Service
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddCoreService();
+            builder.Services.AddJWTService(builder.Configuration);
 
 
             #endregion

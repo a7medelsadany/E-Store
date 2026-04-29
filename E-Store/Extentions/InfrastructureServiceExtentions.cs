@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Domain.Contrats;
 using Persistance.Repositories;
+using Domain.Entities.IdentityModule;
 
 namespace E_Store.Extentions
 {
@@ -15,6 +16,11 @@ namespace E_Store.Extentions
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddDbContext<EStoreDbContextIdentity>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+            });
+
 
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ICartItemRepository, CartItemRepository>();
@@ -23,6 +29,11 @@ namespace E_Store.Extentions
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+
+
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<EStoreDbContextIdentity>();
             return services;
         }
     }
