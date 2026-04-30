@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Domain.Contrats;
+using Domain.Entities.IdentityModule;
 using Domain.Entities.ProductModule;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using ServicesAbstractions;
 
 namespace Services
@@ -15,6 +18,8 @@ namespace Services
         ICartRepository cartRepository,
         ICartItemRepository cartItemRepository,
         IHttpContextAccessor httpContextAccessor,
+        UserManager<ApplicationUser> userManager,
+        IConfiguration configuration,
         IMapper mapper) : IServiceManager
     {
         private readonly Lazy<IProductService> _LazyProductService = new Lazy<IProductService>(() => new ProductService(productRepository, catalogueService, mapper));
@@ -24,6 +29,7 @@ namespace Services
         private readonly Lazy<ICartService> _LazyCartService = new Lazy<ICartService>(() => new CartService(httpContextAccessor, cartRepository, cartItemRepository, productRepository, mapper));
         private readonly Lazy<IOrderService> _LazyOrderService = new Lazy<IOrderService>(() => new OrderService(orderRepository,mapper));
         private readonly Lazy<ICheckoutService> _LazyCheckoutService=new Lazy<ICheckoutService>(()=>new CheckoutService(orderRepository,cartRepository,orderItemRepository,cartItemRepository,mapper));
+        private readonly Lazy<IAuthenticationService> _LazyAuthenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(userManager, configuration));
 
         public IProductService ProductService => _LazyProductService.Value;
 
@@ -39,5 +45,6 @@ namespace Services
 
         public ICheckoutService checkoutService => _LazyCheckoutService.Value;
 
+        public IAuthenticationService AuthenticationService => _LazyAuthenticationService.Value;
     }
 }

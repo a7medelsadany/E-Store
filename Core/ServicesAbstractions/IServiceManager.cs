@@ -9,5 +9,6 @@
         public ICartService CartService { get; }
         public IOrderService orderService { get;  }
         public ICheckoutService checkoutService { get;  }
+        public IAuthenticationService AuthenticationService { get; }
     }
 }
