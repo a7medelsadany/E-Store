@@ -1,9 +1,5 @@
 ﻿
 using E_Store.Extentions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Persistance.Data;
-using System;
 
 namespace E_Store
 {

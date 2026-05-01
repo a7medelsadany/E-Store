@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServicesAbstractions;
 using Shared.Contracts.Request.Checkout;
 using Shared.Contracts.Response.Checkout;
 
 namespace Presentation.Controller
 {
+    [Authorize]
     public class CheckoutController(IServiceManager serviceManager) : APIBaseController
     {
         [HttpPost]

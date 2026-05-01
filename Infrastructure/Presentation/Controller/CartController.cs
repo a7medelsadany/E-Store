@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServicesAbstractions;
 using Shared.Contracts.Request.Cart;
 using Shared.Contracts.Response.Cart;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controller
 {
+    [Authorize]
     public class CartController(IServiceManager serviceManager):APIBaseController
     {
         #region Get Cart
@@ -53,8 +55,9 @@ namespace Presentation.Controller
         }
         #endregion
 
+        #region Remove Item
         [HttpDelete("{CartId}/{CartItemId}")]
-        public async Task<ActionResult<RemoveItemFromCartResponse>> RemoveItemFromCart([FromRoute] long CartId,[FromRoute] long CartItemId)
+        public async Task<ActionResult<RemoveItemFromCartResponse>> RemoveItemFromCart([FromRoute] long CartId, [FromRoute] long CartItemId)
         {
             try
             {
@@ -72,5 +75,6 @@ namespace Presentation.Controller
             }
         }
 
+        #endregion
     }
 }

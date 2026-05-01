@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServicesAbstractions;
 using Shared.Contracts.Request.Order;
 using Shared.Contracts.Response.Order;
 
 namespace Presentation.Controller
 {
+    [Authorize]
     public class OrderController(IServiceManager serviceManager):APIBaseController
     {
         #region Get Order By Id

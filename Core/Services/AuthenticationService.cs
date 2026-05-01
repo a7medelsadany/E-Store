@@ -12,20 +12,45 @@ namespace Services
 {
     public class AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration configuration) : IAuthenticationService
     {
+        #region Get Current User
+        public async Task<UserDto> GetCurrentUserAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email)
+                ?? throw new KeyNotFoundException($"User not found {email}");
+            return new UserDto
+            {
+                Email = user.Email!,
+                DisplayName = user.DisplayName,
+                Token = await GenerateJwtToken(user)
+            };
+        }
+        #endregion
+
+        #region Get User Roles
+        public async Task<IEnumerable<string>> GetUserRolesAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email)
+                ?? throw new KeyNotFoundException($"User not found {email}");
+
+            return await userManager.GetRolesAsync(user);
+        }
+        #endregion
+
+        #region Login
         public async Task<UserDto> LoginAsync(LoginDto loginDto)
         {
-            var Result = await userManager.FindByEmailAsync(loginDto.Email);
-            if (Result is null)
-            {
-                throw new Exception($"user not found {loginDto.Email}");
-            }
+            var Result = await userManager.FindByEmailAsync(loginDto.Email) ?? throw new Exception($"user not found {loginDto.Email}");
+            //if (Result is null)
+            //{
+            //    throw new Exception($"user not found {loginDto.Email}");
+            //}
             var IsPasswordValid = await userManager.CheckPasswordAsync(Result, loginDto.Password);
             if (IsPasswordValid)
             {
                 return new UserDto
                 {
                     Email = Result.Email,
-                    DisplayName = Result.FirstName + " " + Result.LastName,
+                    DisplayName = Result.DisplayName,
                     Token = await GenerateJwtToken(Result)
                 };
             }
@@ -34,7 +59,9 @@ namespace Services
                 throw new UnauthorizedAccessException("Invalid Email or Password");
             }
         }
+        #endregion
 
+        #region Register
         public async Task<UserDto> RegisterAsync(RegisterDto registerDto)
         {
             //mapping the registerDto to ApplicationUser
@@ -42,8 +69,7 @@ namespace Services
             {
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,
-                FirstName = registerDto.DisplayName.Split(" ")[0],
-                LastName = registerDto.DisplayName.Split(" ")[1],
+                DisplayName = registerDto.DisplayName,
                 PhoneNumber = registerDto.PhoneNumber
             };
 
@@ -53,17 +79,20 @@ namespace Services
                 return new UserDto
                 {
                     Email = user.Email,
-                    DisplayName = user.FirstName + " " + user.LastName,
+                    DisplayName = user.DisplayName,
                     Token = await GenerateJwtToken(user)
                 };
             }
             else
             {
                 var errors = Result.Errors.Select(E => E.Description).ToList();
-                throw new Exception($"User registration failed: {errors}");
+                throw new Exception($"User registration failed: {string.Join(", ", errors)}");
             }
         }
 
+        #endregion
+
+        #region Generate Token
         private async Task<string> GenerateJwtToken(ApplicationUser user)
         {
             var Claims = new List<Claim>
@@ -72,28 +101,30 @@ namespace Services
                 new Claim(ClaimTypes.NameIdentifier,user.Id),
                 new Claim(ClaimTypes.Name,user.UserName!)
             };
-            var Roles=await userManager.GetRolesAsync(user);
+            var Roles = await userManager.GetRolesAsync(user);
 
             foreach (var role in Roles)
             {
                 Claims.Add(new Claim(ClaimTypes.Role, role));
             }
             //Create Secret Key
-            var SecKey = configuration.GetSection("JWTOptions")["SecretKey"];
+            var SecKey = configuration.GetSection("JWTOptions")["Key"];
             var Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecKey!));
-            var creds=new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
+            var creds = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
 
 
             //create token
-            var Token=new JwtSecurityToken(
+            var Token = new JwtSecurityToken(
                 issuer: configuration.GetSection("JWTOptions")["Issuer"],
                 audience: configuration.GetSection("JWTOptions")["Audience"],
                 claims: Claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: creds
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(Token);
-        }
+        } 
+        #endregion
+
     }
 }

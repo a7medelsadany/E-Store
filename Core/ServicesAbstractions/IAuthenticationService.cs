@@ -6,6 +6,8 @@ namespace ServicesAbstractions
     {
         Task<UserDto> LoginAsync(LoginDto loginDto);
         Task<UserDto> RegisterAsync(RegisterDto registerDto);
+        Task<UserDto> GetCurrentUserAsync(string email);
+        Task<IEnumerable<string>> GetUserRolesAsync(string email);
 
     }
 }
