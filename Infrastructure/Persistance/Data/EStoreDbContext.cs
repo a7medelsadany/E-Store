@@ -1,14 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Domain.Entities.ProductModule;
+﻿using Domain.Entities.AddressModule;
 using Domain.Entities.Cart;
-using Domain.Entities.AddressModule;
 using Domain.Entities.Customer;
+using Domain.Entities.IdentityModule;
 using Domain.Entities.Order;
+using Domain.Entities.ProductModule;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Persistance.Data
 {
-    public class EStoreDbContext(DbContextOptions<EStoreDbContext> options):DbContext(options)
+    public class EStoreDbContext(DbContextOptions<EStoreDbContext> options)
+     : IdentityDbContext<ApplicationUser>(options)
     {
         #region Dbsets
         public DbSet<Product> Products { get; set; }
@@ -26,6 +29,7 @@ namespace Persistance.Data
         //for Configuration
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

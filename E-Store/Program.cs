@@ -1,5 +1,7 @@
 ﻿
 using E_Store.Extentions;
+using Microsoft.EntityFrameworkCore;
+using Persistance.Data;
 
 namespace E_Store
 {
@@ -35,6 +37,13 @@ namespace E_Store
             builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider
+                    .GetRequiredService<EStoreDbContext>();
+                db.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

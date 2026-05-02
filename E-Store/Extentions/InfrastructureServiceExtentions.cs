@@ -1,25 +1,18 @@
-﻿using Persistance.Data;
+﻿using Domain.Contrats;
+using Domain.Entities.IdentityModule;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Domain.Contrats;
+using Persistance.Data;
 using Persistance.Repositories;
-using Domain.Entities.IdentityModule;
 
 namespace E_Store.Extentions
 {
     public static class InfrastructureServiceExtentions
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<EStoreDbContext>(options =>
-            {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            });
-
-            services.AddDbContext<EStoreDbContextIdentity>(options =>
-            {
-                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
-            });
+               options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddScoped<ICartRepository, CartRepository>();
@@ -30,10 +23,9 @@ namespace E_Store.Extentions
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
 
-
-            services.AddIdentityCore<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<EStoreDbContextIdentity>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<EStoreDbContext>()
+                .AddDefaultTokenProviders();
             return services;
         }
     }
